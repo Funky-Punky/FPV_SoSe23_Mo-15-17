@@ -20,7 +20,11 @@ let sixes = lmap (fun x -> x + 1) fives
 
 (* Partial Application *)
 
+(* a -> b -> c -> d *)
 let func a b c = a b :: c
+
+(* a -> (b -> (c -> d)) *)
+
 (*
    let func2 =
       fun a ->
@@ -29,7 +33,8 @@ let func a b c = a b :: c
             a b :: c
 *)
 
-(* a -> b -> c -> d -> e *)
-(* a -> b -> c -> d -> e *)
+(* a -> b -> c ->  d -> e *)
+(* a -> b -> c -> (d -> e) *)
 
-let plus_five = ( + ) 5
+let plus_five = (fun x -> x + 5)
+let plus_fivedd a = (fun x y -> x + y) 5 a
