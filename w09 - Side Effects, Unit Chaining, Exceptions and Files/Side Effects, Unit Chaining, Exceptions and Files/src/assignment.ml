@@ -20,6 +20,9 @@ let (), () =
 exception My_Exn
 exception Pw_exn of string
 
+
+
+
 let check_password pwd =
   if String.length pwd < 8 then raise (Pw_exn "password to short")
   else if String.contains pwd ' ' then
@@ -28,8 +31,21 @@ let check_password pwd =
     raise (Pw_exn "the password cant be the same, as your TumOnline password")
   else ()
 
-let divide a b = try a / b with Division_by_zero -> -1
+
+
+
+
+let divide a b = 
+try 
+  a / b 
+with Division_by_zero -> -1
+
+
+
+
 let failwith msg = raise (Failure msg)
+
+
 
 (* Unit Chaining *)
 
@@ -42,7 +58,12 @@ let talkative_add a b =
   print_endline "Bon Appétit:";
   sum
 
+
+
 let () = List.iter (fun x -> print_endline (string_of_int x)) [ 1; 2; 3; 4 ]
+
+
+
 
 (* Jonas' File Handling API *)
 
@@ -63,7 +84,7 @@ let () = List.iter (fun x -> print_endline (string_of_int x)) [ 1; 2; 3; 4 ]
 
 
   Writing:
-    output_string : out_channel -> unit
+    output_string : out_channel -> string -> unit
 
   Reading:
     input_line : in_channel -> string
@@ -76,14 +97,18 @@ let () = List.iter (fun x -> print_endline (string_of_int x)) [ 1; 2; 3; 4 ]
 let write_int_list_to_channel channel list =
   List.iter (fun x -> output_string channel (string_of_int x ^ "\n")) list
 
+
 let store_int_list filename list =
   let channel = open_out filename in
   try
     write_int_list_to_channel channel list;
     close_out channel
-  with ex ->
+  with exxxx ->
     close_out channel;
-    raise ex
+    raise exxxx
+
+
+
 
 (* Reading Integer Lists *)
 
@@ -94,6 +119,7 @@ let rec read_int_list_from_channel channel =
   with
   | End_of_file -> []
   | Failure _ -> failwith "Die Liste darf nur Integer Werte enthalten"
+
 
 let load_int_list filename =
   let channel = open_in filename in
