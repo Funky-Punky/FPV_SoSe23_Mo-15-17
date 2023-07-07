@@ -2,6 +2,7 @@ open LibPrintable
 open LibOrderedPrintable
 open LibMap
 
+
 (* module BinaryTreeMap (K : OrderedPrintable) (V : Printable) : Map = struct
      type key = K.t
      type value = V.t
@@ -19,7 +20,7 @@ type ('k, 'v) tree = Leaf | Node of ('k, 'v) tree * ('k * 'v) * ('k, 'v) tree
 
 module BinaryTreeMap (K : OrderedPrintable) (V : Printable) :
   Map with type key = K.t and type value = V.t
-and type t = (K.t, V.t) tree   = struct
+ and type t = (K.t, V.t) tree   = struct
   type key = K.t
   type value = V.t
   type t = (key, value) tree
