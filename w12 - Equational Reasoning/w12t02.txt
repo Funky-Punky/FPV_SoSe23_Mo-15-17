@@ -1,4 +1,3 @@
-
 let rec summa l = match l with [] -> 0
     | h::t -> h + summa t
 
@@ -15,6 +14,170 @@ let rec mul i j a = match i <= 0 with
 Lemma 1:
     sum l 0 = summa l
 
+Generalization:
+(*) sum l g = g + summa l
+
+Proof by Induction on length of l
+
+Base: l = []
+
+            sum [] g
+(sum)       = match [] with [] -> g | h::t -> sum t (h+g)
+(match)     = g
+
+(arith)     = g
+(match)     = g + 0
+(summa)     = g + match [] with [] -> 0 | h::t -> h + summa t
+            = g + summa []
 
 
-==========================================
+Hypotheshis:
+    sum l g = g + summa l
+
+Step: 
+
+            sum x::l g
+(sum)       = match x::l with [] -> g | h::t -> sum t (h+g)
+(match)     = sum l (x+g)
+(I.H.)     = g + x + summa l
+
+
+(match)     = g + x + summa l
+(summa)     = g + match x::l with [] -> 0 | h::t -> h + summa t
+            = g + summa x::l
+
+Trace Back:
+            sum l 0 
+(*)         = 0 + summa l
+(arith)     = summa l
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=================== Version 1 =================================
+
+To prove:
+        mul c (sum l 0) 0 = c * summa l
+
+
+Generalization:
+(*)     mul c (sum l 0) g = g + (c * summa l)
+
+Proof of * by Induction on c
+
+Base: c = 0
+
+            mul 0 (sum l 0) g 
+(mul)       = match 0 <= 0 with | true -> g | false -> mul (0 - 1) b (b + g)
+(arith)     = match true with | true -> g | false -> mul (0 - 1) b (b + g)
+(match)     = g
+
+(arith)     = g
+            = g + (0 * summa l)
+
+Hypothesis:
+    mul c (sum l 0) g = g + (c * summa l)
+
+Step:
+
+            mul (c+1) (sum l 0) g
+(mul)       = match (c+1) <= 0 with | true -> g | false -> mul ((c+1) - 1) (sum l 0) ((sum l 0) + g)
+(arith)     = match false with | true -> g | false -> mul ((c+1) - 1) (sum l 0) ((sum l 0) + g)
+(match)     = mul ((c+1)-1) (sum l 0) ((sum l 0)+g)
+(arith)     = mul c (sum l 0) (g + (sum l 0))
+
+(lemma 1)   = mul c (sum l 0) (g + (sum l 0)) 
+(I.H.)      = mul c (sum l 0) (g + summa l) 
+(arith)     = (g + summa l) + (c * summa l)
+(arith)     = g + summa l + (c * summa l)
+            = g + ((c+1) * summa l)
+
+
+Trace Back:
+            mul c (sum l 0) 0
+(*)         = 0 + (c * summa l)
+(arith)     = c * summa l
+
+
+==================== Version 2 ========================
+
+
+Lemma 2:
+            mul a b 0 = a*b
+
+Generalization: 
+(*)         mul a b g = g + a*b
+
+
+Proof of (*) by induction on a 
+
+Base: a = 0
+
+            mul 0 b g
+(mul)       = match 0 <= 0 with | true -> g | false -> mul (0 - 1) b (b + g)
+(arith)     = match true with | true -> g | false -> mul (0 - 1) b (b + g)
+(match)     = g
+
+(arith)     = g
+            = g + 0*b
+
+
+Hypothesis:
+            mul a b g = g + a*b
+
+Step:
+
+
+            mul (a+1) b g
+(mul)       = match (a+1) <= 0 with | true -> g | false -> mul ((a+1) - 1) b (b + g)
+(arith)     = match false with | true -> g | false -> mul ((a+1) - 1) b (b + g)
+(match)     = mul ((a+1)-1) b (b+g)
+(arith)     = mul a b (b+g)
+(I.H.)      = (b+g) + a*b
+
+(arith)     = (b+g) + a*b
+            = g + (a+1)*b
+
+
+Trace Back:
+
+            mul a b 0
+(*)         = 0 + a*b
+(arith)     = a*b
+
+
+
+
+Other Trace Back:
+
+            mul c (sum l 0) 0
+(lemma1)    = mul c (summa l) 0
+(lemma2)    = c * summa l
+
+
+
+
+
+
+
+
+
+
+
+================================================
+
+
+
+

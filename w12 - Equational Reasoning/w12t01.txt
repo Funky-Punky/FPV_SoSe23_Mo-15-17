@@ -12,4 +12,62 @@ To prove:
         fact_iter n = fact n
 
 
+Adaptation:
+            fact_aux 1 n = fact n
+
+
+Generalization: 
+(*)         fact_aux g n = g * fact n
+
+
+Proof by Induction on n
+
+Base: n = 0
+
+            fact_aux g 0
+(fact_aux)  = match 0 with 0 -> g | n -> fact_aux (n*g) (n-1)
+(match)     = g
+
+(arith)     = g
+(match)     = g * 1
+(fact)      = g * match 0 with 0 -> 1 | n -> n * fact (n-1)
+            = g * fact 0
+
+
+
+Hypothesis:
+            fact_aux g n = g * fact n
+
+Step:
+
+            fact_aux g (n+1) 
+(fact_aux)  = match (n+1) with 0 -> g | n -> fact_aux (n*g) (n-1)
+(match)     = fact_aux ((n+1)*g) ((n+1)-1)
+(arith)     = fact_aux ((n+1)*g) n
+(I.H.)      = ((n+1) * g) * fact n
+(arith)     = g * (n+1) * fact n
+
+(arith)     = g * (n+1) * fact n
+(match)     = g * (n+1) * fact ((n+1)-1)
+(fact)      = g * match (n+1) with 0 -> 1 | n -> n * fact (n-1)
+            = g * fact (n+1)
+
+
+
+
+
+
+Trace Back:
+
+            fact_iter n
+(fact_iter) = fact_aux 1 n
+(*)         = 1 * fact n
+(arith)     = fact n
+
+
+
+
+
+
+
 
