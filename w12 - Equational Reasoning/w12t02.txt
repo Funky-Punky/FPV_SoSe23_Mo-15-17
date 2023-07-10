@@ -1,0 +1,20 @@
+
+let rec summa l = match l with [] -> 0
+    | h::t -> h + summa t
+
+let rec sum l acc = match l with [] -> acc
+    | h::t -> sum t (h+acc)
+
+let rec mul i j a = match i <= 0 with
+  | true -> a
+  | false -> mul (i - 1) j (j + a)
+
+
+================== Lemma 1 =================================
+
+Lemma 1:
+    sum l 0 = summa l
+
+
+
+==========================================
