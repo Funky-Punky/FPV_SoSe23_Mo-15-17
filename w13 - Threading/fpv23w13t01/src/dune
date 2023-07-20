@@ -1,0 +1,13 @@
+(library
+ (name assignment_chaotic)
+ (libraries threads)
+ (flags
+  (:standard -warn-error -27-33))
+ (modules assignment_chaotic))
+
+(library
+ (name assignment_orchestra)
+ (libraries threads)
+ (flags
+  (:standard -warn-error -27-33))
+ (modules assignment_orchestra))
